@@ -1,0 +1,441 @@
+/* =========================================
+   HEADER.CSS
+   Berisi: Header sticky, navigasi menu, dropdown,
+   logo, action bar (bahasa, search, CTA),
+   dan hamburger menu untuk tampilan mobile
+   ========================================= */
+
+/* --- Header Wrapper --- */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--color-white);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    transition: background-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    gap: 30px;
+}
+
+/* --- Logo Telkom University Surabaya --- */
+.site-branding {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header-logo {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* --- Navigasi Desktop (Di Tengah Header Sesuai Foto 1) --- */
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 4px;
+}
+
+.nav-menu > li {
+    position: relative;
+}
+
+.nav-menu > li > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 30px 16px;
+    font-family: var(--font-heading);
+    font-size: 0.90rem;
+    font-weight: 600;
+    color: #646473; /* Warna abu-abu saat tidak aktif / tidak di-hover */
+    white-space: nowrap;
+    position: relative;
+    transition: color var(--transition-fast);
+}
+
+.arrow-down {
+    font-size: 0.65rem;
+    color: #9c9ca8; /* Warna panah abu-abu saat normal */
+    display: inline-block;
+    transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-menu > li:hover > a .arrow-down,
+.nav-menu > li > a.active .arrow-down {
+    color: #271b58;
+    transform: rotate(180deg);
+}
+
+/* Garis bawah animasi hover dan active menu */
+.nav-menu > li > a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    height: 3px;
+    background-color: #271b58; /* Garis bawah warna ungu */
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--transition-fast);
+}
+
+.nav-menu > li:hover > a,
+.nav-menu > li > a.active {
+    color: #271b58; /* Warna ungu saat hover atau active */
+}
+
+.nav-menu > li > a:hover::after,
+.nav-menu > li > a.active::after {
+    transform: scaleX(1);
+}
+
+/* --- Dropdown Submenu --- */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 230px;
+    background-color: var(--color-white);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: all var(--transition-fast);
+    z-index: 1010;
+    border-top: 3px solid var(--color-primary);
+}
+
+.nav-menu > li:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #444;
+    transition: all var(--transition-fast);
+}
+
+.dropdown-menu li a:hover {
+    color: var(--color-primary);
+    background-color: var(--color-bg-light);
+    padding-left: 25px;
+}
+
+/* --- Header Action Elements --- */
+.header-action {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.header-icon {
+    width: 17px;
+    height: 17px;
+    fill: #271b58;
+    transition: fill var(--transition-fast);
+}
+
+
+
+.search-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 50%;
+    transition: transform var(--transition-fast);
+}
+
+.search-btn:hover .header-icon {
+    fill: var(--color-primary);
+    transform: scale(1.1);
+}
+
+/* Tombol CTA Merah */
+.btn-primary {
+    display: inline-block;
+    padding: 11px 24px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-sm);
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(181, 26, 43, 0.25);
+    transition: all var(--transition-fast);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dk);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(181, 26, 43, 0.35);
+}
+
+/* --- Hamburger Mobile Button --- */
+.nav-toggle {
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-toggle-label {
+    display: none;
+    cursor: pointer;
+    width: 28px;
+    height: 22px;
+    position: relative;
+    flex-shrink: 0;
+    z-index: 1001;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    display: block;
+    width: 100%;
+    height: 2.5px;
+    background-color: var(--color-dark);
+    border-radius: 2px;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle-label span {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.nav-toggle-label span::before {
+    content: '';
+    top: -8px;
+}
+
+.nav-toggle-label span::after {
+    content: '';
+    bottom: -8px;
+}
+
+/* =========================================
+   OFFCANVAS MOBILE DRAWER & ACCORDION
+   (Slide dari kanan ke kiri sesuai screenshot)
+   ========================================= */
+
+/* Overlay Gelap Penutup Layar */
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    cursor: pointer;
+}
+
+/* Offcanvas Sidebar Panel (Meluncur dari kanan ke kiri) */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    max-width: calc(100vw - 52px);
+    height: 100vh;
+    height: 100dvh;
+    background-color: #ffffff;
+    z-index: 9999;
+    box-shadow: -6px 0 25px rgba(0, 0, 0, 0.2);
+    transform: translateX(100%); /* Posisi awal tersembunyi di luar sisi kanan */
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0.35s ease, opacity 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden; /* Sembunyikan sepenuhnya saat belum dibuka sehingga tombol X tidak muncul */
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Trigger Drawer saat Hamburger / Checkbox aktif */
+.nav-toggle:checked ~ .drawer-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.nav-toggle:checked ~ .mobile-drawer {
+    transform: translateX(0); /* Meluncur masuk dari kanan ke kiri */
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Sembunyikan Drawer dan Overlay di Tampilan Desktop */
+@media screen and (min-width: 993px) {
+    .drawer-overlay,
+    .mobile-drawer,
+    .nav-toggle,
+    .nav-toggle-label {
+        display: none !important;
+    }
+}
+
+/* Tombol Tutup Kotak Merah di Kiri Atas Drawer (Sesuai Foto 1 & 2) */
+.drawer-close {
+    position: absolute;
+    top: 0;
+    left: -46px;
+    width: 46px;
+    height: 46px;
+    background-color: #8F1220; /* Merah maroon Telkom */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: -3px 2px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color var(--transition-fast);
+}
+
+.drawer-close:hover {
+    background-color: #720e19;
+}
+
+.drawer-close svg {
+    width: 18px;
+    height: 18px;
+    fill: #ffffff;
+}
+
+/* Kontainer Menu di dalam Drawer */
+.drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 0 40px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.drawer-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.drawer-item {
+    border-bottom: 1px solid #ebebeb;
+}
+
+.drawer-link {
+    display: block;
+    padding: 16px 24px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    color: #222222;
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.drawer-link:hover {
+    color: var(--color-primary);
+    background-color: #fafafa;
+}
+
+/* Accordion Menggunakan Native Details & Summary */
+.drawer-accordion {
+    width: 100%;
+}
+
+.drawer-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    color: #222222;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.drawer-summary::-webkit-details-marker {
+    display: none;
+}
+
+.drawer-summary:hover {
+    color: var(--color-primary);
+    background-color: #fafafa;
+}
+
+.drawer-summary .plus-icon {
+    font-size: 18px;
+    font-weight: 400;
+    color: #333333;
+    line-height: 1;
+    transition: transform var(--transition-fast);
+}
+
+/* Submenu di dalam Drawer Accordion (Tampilan Foto 2) */
+.drawer-submenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+.drawer-submenu li {
+    border-top: 1px solid #f2f2f2;
+}
+
+.drawer-submenu li a {
+    display: block;
+    padding: 14px 24px 14px 34px; /* Indentasi rapi sesuai screenshot */
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.drawer-submenu li a:hover {
+    color: var(--color-primary);
+    background-color: #fcfcfc;
+    padding-left: 38px;
+}
+

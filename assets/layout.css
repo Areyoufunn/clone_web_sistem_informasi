@@ -1,0 +1,15 @@
+/* =========================================
+   LAYOUT.CSS
+   Berisi: Layout container dan helper struktur
+   yang digunakan secara global pada halaman
+   ========================================= */
+
+/* --- Container Utama --- */
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
